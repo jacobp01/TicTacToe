@@ -11,13 +11,17 @@ public class TProcesses
    public void playerComputer(){
        char[][] board = new char[3][3];
        int moves = 0;
+       boolean victory = false;
        fillWithBlanks(board);
        System.out.println("Human Player will play with X's, Computer with O's");
+       while(victory = false){
        humanMove(board);
        printBoard(board);
        moves++;
-       System.out.println("Computer's Move");
        comMove(board);
+       printBoard(board);
+       moves++;
+    }
     }
    public void twoPlayer(){
        char[][] board = new char[3][3];
@@ -49,7 +53,16 @@ public class TProcesses
         }
     }
    public void comMove(char[][] board){
-       
+       System.out.println("Computer's Move");
+       int xCoord = (int) Math.random() * 3;
+       int yCoord = (int) Math.random() * 3;
+       if(board[xCoord][yCoord] == '-'){
+        board[xCoord][yCoord] = 'O';
+        }
+     if(board[xCoord][yCoord] != '-')
+     {
+         comMove(board);
+        }
     }
    public void fillWithBlanks(char[][] board){
               for(int row = 0; row < board.length; row++)
