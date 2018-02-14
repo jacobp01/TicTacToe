@@ -233,16 +233,16 @@ public class tProcesses
     System.out.println();
 }
     public void checkVictoryO(char[][] board){
-        int a = board[0][0];
-        int b = board[0][1];
-        int c = board[0][2];
-        int d = board[1][0];
-        int e = board[1][1];
-        int f = board[1][2];
-        int g = board[2][0];
-        int h = board[2][1];
-        int i = board[2][2];
-        if(a != 0){
+        char a = board[0][0];
+        char b = board[0][1];
+        char c = board[0][2];
+        char d = board[1][0];
+        char e = board[1][1];
+        char f = board[1][2];
+        char g = board[2][0];
+        char h = board[2][1];
+        char i = board[2][2];
+        if(a != '-'){
             if(a == b && b == c){
                 oWinner = true;
                 victory = true;
@@ -256,7 +256,7 @@ public class tProcesses
                 victory = true;
             }
         }
-        if(i !=0){
+        if(i != '-'){
             if(i == h && h == g){
                 oWinner = true;
                 victory = true;
@@ -270,7 +270,7 @@ public class tProcesses
                 victory = true;
             }
         }
-        if(e != 0){
+        if(e != '-'){
             if(b == e && e == h){
                 oWinner = true;
                 victory = true;
@@ -282,50 +282,50 @@ public class tProcesses
         }
 }
     public void checkVictoryX(char[][] board){
-         int a = board[0][0];
-        int b = board[0][1];
-        int c = board[0][2];
-        int d = board[1][0];
-        int e = board[1][1];
-        int f = board[1][2];
-        int g = board[2][0];
-        int h = board[2][1];
-        int i = board[2][2];
-        if(a != 0){
+        char a = board[0][0];
+        char b = board[0][1];
+        char c = board[0][2];
+        char d = board[1][0];
+        char e = board[1][1];
+        char f = board[1][2];
+        char g = board[2][0];
+        char h = board[2][1];
+        char i = board[2][2];
+        if(a != '-'){
             if(a == b && b == c){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
             if(a == d && d == g){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
             if(a == e && e == i){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
         }
-        if(i !=0){
+        if(i != '-'){
             if(i == h && h == g){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
             if(i == e && e == a){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
             if(i == f && f == c){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
         }
-        if(e != 0){
+        if(e != '-'){
             if(b == e && e == h){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
             if(d == e && e == f){
-                xWinner = true;
+                oWinner = true;
                 victory = true;
             }
         }
