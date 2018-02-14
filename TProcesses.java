@@ -13,6 +13,7 @@ public class tProcesses
    boolean victory = false;
    boolean xWinner = false;
    boolean oWinner = false;
+   // consider moving the "choice" system to restart back over to Tconsole?
    public void playerComputer(){
           String Achoice;
           String print;
