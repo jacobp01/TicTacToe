@@ -13,9 +13,6 @@ public class tProcesses
    boolean victory = false;
    boolean xWinner = false;
    boolean oWinner = false;
-   public tProcesses(){
-       console = new Scanner(System.in);
-    }
    public void playerComputer(){
           String Achoice;
           String print;
@@ -236,98 +233,101 @@ public class tProcesses
     System.out.println();
 }
     public void checkVictoryO(char[][] board){
-        int n = 3;
-         for(int i = 0; i < n; i++){
-            for(int x = 0; x < n; x++){
-            if(board[x][i] != 'O')
-                break;
-            if(i == n-1){
-               victory = true;
-               oWinner = true;
+        int a = board[0][0];
+        int b = board[0][1];
+        int c = board[0][2];
+        int d = board[1][0];
+        int e = board[1][1];
+        int f = board[1][2];
+        int g = board[2][0];
+        int h = board[2][1];
+        int i = board[2][2];
+        if(a != 0){
+            if(a == b && b == c){
+                oWinner = true;
+                victory = true;
+            }
+            if(a == d && d == g){
+                oWinner = true;
+                victory = true;
+            }
+            if(a == e && e == i){
+                oWinner = true;
+                victory = true;
             }
         }
-    }
-        
-        for(int i = 0; i < n; i++){
-          for(int y = 0; y < n; y++){
-            if(board[i][y] != 'O')
-                break;
-            if(i == n-1){
-               victory = true;
-               oWinner = true;
+        if(i !=0){
+            if(i == h && h == g){
+                oWinner = true;
+                victory = true;
+            }
+            if(i == e && e == a){
+                oWinner = true;
+                victory = true;
+            }
+            if(i == f && f == c){
+                oWinner = true;
+                victory = true;
             }
         }
-    }
-
-            for(int i = 0; i < n; i++){
-                if(board[i][i] != 'O')
-                    break;
-                if(i == n-1){
-                  victory = true;
-                  oWinner = true;
-                }
+        if(e != 0){
+            if(b == e && e == h){
+                oWinner = true;
+                victory = true;
             }
-    for(int x = 0; x < n; x++){
-        for(int y = 0; y < n; y++){
-        if(x + y == n - 1){
-            for(int i = 0; i < n; i++){
-                if(board[i][(n-1)-i] != 'O')
-                    break;
-                if(i == n-1){
-                  victory = true;
-                  oWinner = true;
-                }
+            if(d == e && e == f){
+                oWinner = true;
+                victory = true;
             }
         }
-}
-}
 }
     public void checkVictoryX(char[][] board){
-        int n = 3;
-         for(int i = 0; i < n; i++){
-            for(int x = 0; x < n; x++){
-            if(board[x][i] != 'X')
-                break;
-            if(i == n-1){
-               victory = true;
-               xWinner = true;
+         int a = board[0][0];
+        int b = board[0][1];
+        int c = board[0][2];
+        int d = board[1][0];
+        int e = board[1][1];
+        int f = board[1][2];
+        int g = board[2][0];
+        int h = board[2][1];
+        int i = board[2][2];
+        if(a != 0){
+            if(a == b && b == c){
+                xWinner = true;
+                victory = true;
+            }
+            if(a == d && d == g){
+                xWinner = true;
+                victory = true;
+            }
+            if(a == e && e == i){
+                xWinner = true;
+                victory = true;
             }
         }
-    }
-        
-        for(int i = 0; i < n; i++){
-          for(int y = 0; y < n; y++){
-            if(board[i][y] != 'X')
-                break;
-            if(i == n-1){
-               victory = true;
-               xWinner = true;
+        if(i !=0){
+            if(i == h && h == g){
+                xWinner = true;
+                victory = true;
+            }
+            if(i == e && e == a){
+                xWinner = true;
+                victory = true;
+            }
+            if(i == f && f == c){
+                xWinner = true;
+                victory = true;
             }
         }
-    }
-
-            for(int i = 0; i < n; i++){
-                if(board[i][i] != 'X')
-                    break;
-                if(i == n-1){
-                  victory = true;
-                  xWinner = true;
-                }
+        if(e != 0){
+            if(b == e && e == h){
+                xWinner = true;
+                victory = true;
             }
-        
-    for(int x = 0; x < n; x++){
-        for(int y = 0; y < n; y++){
-        if(x + y == n - 1){
-            for(int i = 0; i < n; i++){
-                if(board[i][(n-1)-i] != 'X')
-                    break;
-                if(i == n-1){
-                  victory = true;
-                  xWinner = true;
-                }
+            if(d == e && e == f){
+                xWinner = true;
+                victory = true;
             }
         }
-}
-}
 }
 }
