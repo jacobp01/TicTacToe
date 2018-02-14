@@ -8,14 +8,14 @@ import java.util.*;
 public class TConsole
 {
    private Scanner console;
-   private TProcesses tProcesses;
+   private tProcesses tProcesses;
    public TConsole(){
        console = new Scanner(System.in);
     }
    public void menu(){
        String choice;
        String print;
-       tProcesses = new TProcesses();
+       tProcesses = new tProcesses();
        do{
            System.out.println("Welcome to Tic Tac Toe, designed by Jacob Pawlak, APCS Period 3");
            System.out.println("Select a play mode:");
