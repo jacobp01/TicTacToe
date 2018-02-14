@@ -15,7 +15,6 @@ public class tProcesses
    boolean oWinner = false;
    // consider moving the "choice" system to restart back over to Tconsole?
    public void playerComputer(){
-          String Achoice;
           String print;
           TConsole = new TConsole(); 
        char[][] board = new char[3][3];
@@ -30,6 +29,7 @@ public class tProcesses
            printBoard(board);
            checkVictoryX(board);
            moves++;
+           System.out.println("Computer's Move");
            comMove(board);
            printBoard(board);
            checkVictoryO(board);
@@ -41,7 +41,7 @@ public class tProcesses
                System.out.println("(Q) Quit");
                System.out.println();
                System.out.print("Choice -> ");
-               Achoice = console.next() + " ";
+               String Achoice = console.next() + " ";
                 if('1' <= Achoice.charAt(0)){
                     System.out.println();
                     switch (Achoice.charAt(0)){
@@ -58,7 +58,7 @@ public class tProcesses
                System.out.println("(Q) Quit");
                System.out.println();
                System.out.print("Choice -> ");
-               Achoice = console.next() + " ";
+               String Achoice = console.next() + " ";
                 if('1' <= Achoice.charAt(0)){
                     System.out.println();
                     switch (Achoice.charAt(0)){
@@ -74,7 +74,7 @@ public class tProcesses
                System.out.println("(Q) Quit");
                System.out.println();
                System.out.print("Choice -> ");
-               Achoice = console.next() + " ";;
+               String Achoice = console.next() + " ";;
                 if('1' <= Achoice.charAt(0)){
                     System.out.println();
                     switch (Achoice.charAt(0)){
@@ -204,7 +204,6 @@ public class tProcesses
         }
     } 
    public void comMove(char[][] board){
-       System.out.println("Computer's Move");
        int xCoord = (int) (Math.random() * 3);
        int yCoord = (int) (Math.random() * 3);
        if(board[xCoord][yCoord] == '-'){
