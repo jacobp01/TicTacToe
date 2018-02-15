@@ -13,11 +13,12 @@ public class tProcesses
    boolean victory = false;
    boolean xWinner = false;
    boolean oWinner = false;
+   int boardSize = 3;
    // consider moving the "choice" system to restart back over to Tconsole?
    public void playerComputer(){
-          String print;
-          TConsole = new TConsole(); 
-       char[][] board = new char[3][3];
+       TConsole = new TConsole(); 
+       boardSize = TConsole.boardSize();
+       char[][] board = new char[boardSize][boardSize];
        int moves = 0;
        fillWithBlanks(board);
        xWinner = false;
@@ -34,62 +35,31 @@ public class tProcesses
            printBoard(board);
            checkVictoryO(board);
            moves++;
-           if(moves >= 9)
+           if(moves >= (boardSize ^ 2))
            {
                System.out.println("The game is a Tie, do you wish to restart?");
-               System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               String Achoice = console.next() + " ";
-                if('1' <= Achoice.charAt(0)){
-                    System.out.println();
-                    switch (Achoice.charAt(0)){
-                case '1':
-                playerComputer();
-                break;
+               if(TConsole.replayChoice() == 1){
+               playerComputer();
             }
         }
-       }
-       }
+        }
        if(xWinner = true){
            System.out.println("Human Player Wins!");
-            System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               String Achoice = console.next() + " ";
-                if('1' <= Achoice.charAt(0)){
-                    System.out.println();
-                    switch (Achoice.charAt(0)){
-                case '1':
-                playerComputer();
-                break;
+           if(TConsole.replayChoice() == 1){
+               playerComputer();
             }
-        }
        }
        if(oWinner = true){
-           System.out.println("Seriously? The computer beat you? Rethink your strategy.");
-            System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               String Achoice = console.next() + " ";;
-                if('1' <= Achoice.charAt(0)){
-                    System.out.println();
-                    switch (Achoice.charAt(0)){
-                case '1':
-                playerComputer();
-                break;
+           System.out.println("Computer Victory. Do not resist our synthetic overlords.");
+           if(TConsole.replayChoice() == 1){
+               playerComputer();
             }
-        }
        }
         }
  
    public void twoPlayer(){
-          String choice;
-          String print;
-       char[][] board = new char[3][3];
+       boardSize = TConsole.boardSize();
+       char[][] board = new char[boardSize][boardSize];
        int moves = 0;
        System.out.println("Player 1 is X's, Player 2 is O's");
        fillWithBlanks(board);
@@ -102,70 +72,40 @@ public class tProcesses
            printBoard(board);
            checkVictoryO(board);
            moves++;
-           if(moves >= 9)
+           if(moves >= (boardSize ^ 2))
            {
                System.out.println("The game is a Tie, do you wish to restart?");
-               System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               choice = console.next() + " ";
-                if('1' <= choice.charAt(0)){
-                    System.out.println();
-                    switch (choice.charAt(0)){
-                case '1':
-                twoPlayer();
-                break;
+               if(TConsole.replayChoice() == 1){
+               twoPlayer();
             }
-        }
        }
        }
        if(xWinner = true){
            System.out.println("Player 1 Wins! Do you wish to restart?");
-            System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               choice = console.next() + " ";
-                if('1' <= choice.charAt(0)){
-                    System.out.println();
-                    switch (choice.charAt(0)){
-                case '1':
-                twoPlayer();
-                break;
+            if(TConsole.replayChoice() == 1){
+               twoPlayer();
             }
-        }
        }
        if(oWinner = true){
            System.out.println("Player 2 Wins! Do you wish to restart?");
-            System.out.println("(1): Restart Game");
-               System.out.println("(Q) Quit");
-               System.out.println();
-               System.out.print("Choice -> ");
-               choice = console.next() + " ";
-                if('1' <= choice.charAt(0)){
-                    System.out.println();
-                    switch (choice.charAt(0)){
-                case '1':
-                twoPlayer();
-                break;
+           if(TConsole.replayChoice() == 1){
+               twoPlayer();
             }
-        }
        }
     }
    public void humanMove(char[][] board){
      printBoard(board);
-     System.out.println("Human Move, choose a X-coordinate (from 0 to 2) to place your X");
+     System.out.println("Human Move, choose a X-coordinate from 0 to "+ (boardSize -1));
      int xCoord;
      int yCoord;
      xCoord = userInput.nextInt();
-     if(xCoord > 2 || xCoord < 0){
+     if(xCoord > boardSize || xCoord < 0){
          System.out.println("Error, no X-coordinate exists with that value. Remake your move");
          humanMove(board);
         }
-     System.out.println("Choose a Y-Coordinate from 0 to 2");
+     System.out.println("Choose a Y-Coordinate from 0 to " + (boardSize -1));
      yCoord = userInput.nextInt();
-     if(yCoord > 2 || yCoord < 0){
+     if(yCoord > boardSize || yCoord < 0){
          System.out.println("Error, no Y-coordinate exists with that value. Remake your move");
          humanMove(board);
         }
@@ -179,15 +119,15 @@ public class tProcesses
          humanMove(board);
         }
     }
-      public void humanMove2(char[][] board){
+   public void humanMove2(char[][] board){
      printBoard(board);
-     System.out.println("Player 2 Move, choose a X-coordinate (from 0 to 2) to place your O");
+     System.out.println("Player 2 Move, choose a X-coordinate from 0 to " + (boardSize -1));
      int xCoord = userInput.nextInt();
      if(xCoord > 2 || xCoord < 0){
          System.out.println("Error, no X-coordinate exists with that value. Remake your move");
          humanMove2(board);
         }
-     System.out.println("Choose a Y-Coordinate from 0 to 2");
+     System.out.println("Choose a Y-Coordinate from 0 to " + (boardSize -1));
      int yCoord = userInput.nextInt();
      if(yCoord > 2 || yCoord < 0){
          System.out.println("Error, no Y-coordinate exists with that value. Remake your move");
@@ -204,8 +144,8 @@ public class tProcesses
         }
     } 
    public void comMove(char[][] board){
-       int xCoord = (int) (Math.random() * 3);
-       int yCoord = (int) (Math.random() * 3);
+       int xCoord = (int) (Math.random() * boardSize);
+       int yCoord = (int) (Math.random() * boardSize);
        if(board[xCoord][yCoord] == '-'){
         board[xCoord][yCoord] = 'O';
         }
@@ -293,39 +233,39 @@ public class tProcesses
         char i = board[2][2];
         if(a != '-'){
             if(a == b && b == c){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
             if(a == d && d == g){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
             if(a == e && e == i){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
         }
         if(i != '-'){
             if(i == h && h == g){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
             if(i == e && e == a){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
             if(i == f && f == c){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
         }
         if(e != '-'){
             if(b == e && e == h){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
             if(d == e && e == f){
-                oWinner = true;
+                xWinner = true;
                 victory = true;
             }
         }

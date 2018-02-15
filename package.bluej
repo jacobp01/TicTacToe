@@ -1,5 +1,5 @@
 #BlueJ package file
-dependency1.from=tProcesses
+dependency1.from=TProcesses
 dependency1.to=TConsole
 dependency1.type=UsesDependency
 objectbench.height=76
@@ -28,10 +28,11 @@ target1.x=80
 target1.y=10
 target2.editor.height=700
 target2.editor.width=900
-target2.editor.x=202
-target2.editor.y=31
+target2.editor.x=145
+target2.editor.y=59
 target2.height=50
-target2.name=tProcesses
+target2.name=TProcesses
+target2.naviview.expanded=false
 target2.showInterface=false
 target2.type=ClassTarget
 target2.typeParameters=

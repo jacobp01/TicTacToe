@@ -12,6 +12,36 @@ public class TConsole
    public TConsole(){
        console = new Scanner(System.in);
     }
+   public int replayChoice(){
+       String choice;
+       do{
+        System.out.println("Do you wish to replay the game?");
+           System.out.println("(1): Restart Game");
+               System.out.println("(Q) Quit");
+               System.out.println();
+               System.out.print("Choice -> ");
+               choice = console.next() + " ";;
+                if('1' <= choice.charAt(0)){
+                    System.out.println();
+                    switch (choice.charAt(0)){
+                case '1':
+                return 1;
+            }
+        }
+    }while (choice.charAt(0) != 'Q' && choice.charAt(0) != 'q');
+    return -1;
+    }
+   public int boardSize(){
+       int size = 3;
+       do{
+          System.out.println("Enter what size of board you would like to play on (n by n)");
+          System.out.println();
+          System.out.print("Choice -> ");
+          size = console.nextInt();
+          break;
+        }while(size != 0);
+       return size;
+    }
    public void menu(){
        String choice;
        String print;
