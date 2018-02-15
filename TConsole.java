@@ -47,6 +47,7 @@ public class TConsole
        String print;
        tProcesses = new tProcesses();
        do{
+           int boardSize = boardSize();
            System.out.println("Welcome to Tic Tac Toe, designed by Jacob Pawlak, APCS Period 3");
            System.out.println("Select a play mode:");
            System.out.println("(1) Player vs. Computer");
@@ -59,10 +60,10 @@ public class TConsole
             System.out.println();
             switch (choice.charAt(0)){
             case '1':
-            tProcesses.playerComputer();
+            tProcesses.playerComputer(boardSize);
             break;
             case '2':
-            tProcesses.twoPlayer();
+            tProcesses.twoPlayer(boardSize);
             break;
             }
         }
