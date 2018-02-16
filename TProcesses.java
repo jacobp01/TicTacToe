@@ -142,15 +142,72 @@ public class tProcesses
         }
     } 
    public void comMove(char[][] board, int boardSize){
+       // Find move that the CPU can make to win - Highest Priority
+       // Find move to block a player win - Next Priority
+       // Make random move - Lowest Priority
+       int[] humanCoord = canWin(board, boardSize);
+       int[] comCoord = canComWin(board, boardSize);
+       if(humanCoord[0] != -1){
+          xCoord = humanCoord[0];
+          yCoord = humanCoord[1];
+          board[xCoord][yCoord] = 'O';
+       }
+       
+       else if(comCoord[0] != -1){
+          xCoord = comCoord[0];
+          yCoord = comCoord[1];
+          board[xCoord][yCoord] = 'O';
+           }
+       else{
        xCoord = (int) (Math.random() * boardSize);
        yCoord = (int) (Math.random() * boardSize);
        if(board[xCoord][yCoord] == '-'){
         board[xCoord][yCoord] = 'O';
         }
-     else
-     {
+       else
+        {
          comMove(board, boardSize);
         }
+    }
+}
+   public int[] canWin(char[][] board, int boardSize){
+      // checks if Human Player can win, returns coordinates to make move, -1 if not
+      // needs to check that the space is open
+      int[] coord = new int[2];
+      int xCom = -1;
+      int yCom = -1;
+      // check for if the human can win, then block it
+      // vertical win
+      // NOTE: Not Tested
+      // NOTE: only works if the X player is going from top to bottom, doesn't work for bot to top
+      // or if they go bot, top, then randomly through middle
+      for(int i = 0; i < boardSize; i++){
+            if(board[xCoord][i] != 'X'){
+             
+            }
+            if(i == boardSize-2){
+               xCom = 
+               yCom =
+            }
+        }
+      // horizonal win
+      // diag
+      // reverse diag
+      coord[0] = xCom;
+      coord[1] = yCom;
+      return coord;
+    }
+   public int[] canComWin(char[][] board, int boardSize){
+       // checks if Computer player can win returns coordinates to make move, -1 if not
+       // needs to check that the space is open
+       int[] coord = new int[2];
+       int xCom = -1;
+       int yCom = -1;
+       // check for if the computer can win
+       
+       coord[0] = xCom;
+       coord[1] = yCom;
+       return coord;
     }
    public void fillWithBlanks(char[][] board){
               for(int row = 0; row < board.length; row++)
@@ -177,7 +234,7 @@ public class tProcesses
              break;
             }
             if(i == boardSize-1){
-               xWinner = true;
+               oWinner = true;
                victory = true;  
             }
         }
@@ -187,7 +244,7 @@ public class tProcesses
                 break;
             }
             if(i == boardSize-1){
-            xWinner = true;
+            oWinner = true;
             victory = true;
             }
         }
@@ -198,7 +255,7 @@ public class tProcesses
                   break;
                 }
                 if(i == boardSize-1){
-                  xWinner = true;
+                  oWinner = true;
                   victory = true;
                 }
             }
@@ -211,7 +268,7 @@ public class tProcesses
                     break;
                 }
                 if(i == boardSize-1){
-                   xWinner = true;
+                   oWinner = true;
                    victory = true;
                 }
             }
