@@ -183,11 +183,11 @@ public class tProcesses
       // or if they go bot, top, then randomly through middle
       for(int i = 0; i < boardSize; i++){
             if(board[xCoord][i] != 'X'){
-             
+             break;
             }
             if(i == boardSize-2){
-               xCom = 
-               yCom =
+               xCom = i;
+               yCom = i;
             }
         }
       // horizonal win
