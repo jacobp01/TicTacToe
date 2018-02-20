@@ -176,47 +176,50 @@ public class tProcesses
       int[] coord = new int[2];
       int xCom = -1;
       int yCom = -1;
-      // check for if the human can win, then block it
-      // vertical win
+      // all of these only work if the human player goes in order
+      // idea: check a column/row for boardsize - 1 Xs, then if there are place an O where there isn't one
+      // need that but for diagonals?
+      int xCount = 0;
+      // row
       for(int i = 0; i < boardSize; i++){
-            if(board[xCoord][i] != 'X'){
-             break;
+          if(board[xCoord][i] == 'X'){
+              xCount++;
             }
-            if(i == boardSize-2){
-               xCom = i + 1;
-               yCom = i + 1;
+          if(xCount == (boardSize - 1)){
+              for(int z = 0; i < boardSize; i++){
+                 if(board[xCoord][z] != 'X'){
+                     xCom = xCoord;
+                     yCom = z;
+                    }
+                }
             }
         }
-      // horizonal win
+      // col
       for(int i = 0; i < boardSize; i++){
-        if(board[i][yCoord] != 'X'){
-           break;
+          if(board[i][yCoord] == 'X'){
+              xCount++;
             }
-        if(i == boardSize-2){
-            xCom = i + 1;
-            yCom = i + 1;
+          if(xCount == (boardSize - 1)){
+              for(int z = 0; i < boardSize; i++){
+                 if(board[z][yCoord] != 'X'){
+                     xCom = z;
+                     yCom = yCoord;
+                    }
+                }
             }
         }
       // diag
       for(int i = 0; i < boardSize; i++){
-          if(board[i][i] != 'X'){
-              break;
+          if(board[i][i] == 'X'){
+              xCount++;
             }
-          if(i == boardSize-2){
+          if(xCount == (boardSize - 1)){
               xCom = i + 1;
               yCom = i + 1;
             }
         } 
       // reverse diag
-      for(int i = 0; i < boardSize; i++){
-          if(board[i][(boardSize - 1) - i] != 'X'){
-              break;
-            }
-          if(i == boardSize-2){
-              xCom = i + 1;
-              yCom = i + 1;
-            }
-        }
+
       coord[0] = xCom;
       coord[1] = yCom;
       return coord;
@@ -227,45 +230,34 @@ public class tProcesses
        int[] coord = new int[2];
        int xCom = -1;
        int yCom = -1;
+       int xCount = 0;
        // check for if the computer can win
-       //vert
-       for(int i = 0; i < boardSize; i++){
-            if(board[xCoord][i] != 'O'){
-             break;
-            }
-            if(i == boardSize-2){
-               xCom = i + 1;
-               yCom = i + 1;
-            }
-        }
-        // hori
-       for(int i = 0; i < boardSize; i++){
-        if(board[i][yCoord] != 'O'){
-           break;
-            }
-        if(i == boardSize-2){
-            xCom = i + 1;;
-            yCom = i + 1;
-            }
-        }
-      // diag
+       // row
       for(int i = 0; i < boardSize; i++){
-          if(board[i][i] != 'O'){
-              break;
+          if(board[xCoord][i] == 'O'){
+              xCount++;
             }
-          if(i == boardSize-2){
-              xCom = i + 1;
-              yCom = i + 1;
+          if(xCount == (boardSize - 1)){
+              for(int z = 0; i < boardSize; i++){
+                 if(board[xCoord][z] != 'O'){
+                     xCom = xCoord;
+                     yCom = z;
+                    }
+                }
             }
         }
-      // reverse diag 
-            for(int i = 0; i < boardSize; i++){
-          if(board[i][(boardSize - 1) - i] != 'O'){
-              break;
+      // col
+      for(int i = 0; i < boardSize; i++){
+          if(board[i][yCoord] == 'O'){
+              xCount++;
             }
-          if(i == boardSize-2){
-              xCom = i + 1;
-              yCom = i + 1;
+          if(xCount == (boardSize - 1)){
+              for(int z = 0; i < boardSize; i++){
+                 if(board[z][yCoord] != 'O'){
+                     xCom = z;
+                     yCom = yCoord;
+                    }
+                }
             }
         }
        coord[0] = xCom;
