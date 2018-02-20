@@ -49,7 +49,7 @@ public class tProcesses
                playerComputer(boardSize);
             }
        }
-       if(oWinner = true){
+       else if(oWinner = true){
            System.out.println("Computer Victory. Do not resist our synthetic overlords.");
            if(TConsole.replayChoice() == 1){
                playerComputer(boardSize);
@@ -178,21 +178,45 @@ public class tProcesses
       int yCom = -1;
       // check for if the human can win, then block it
       // vertical win
-      // NOTE: Not Tested
-      // NOTE: only works if the X player is going from top to bottom, doesn't work for bot to top
-      // or if they go bot, top, then randomly through middle
       for(int i = 0; i < boardSize; i++){
             if(board[xCoord][i] != 'X'){
              break;
             }
             if(i == boardSize-2){
-               xCom = i;
-               yCom = i;
+               xCom = i + 1;
+               yCom = i + 1;
             }
         }
       // horizonal win
+      for(int i = 0; i < boardSize; i++){
+        if(board[i][yCoord] != 'X'){
+           break;
+            }
+        if(i == boardSize-2){
+            xCom = i + 1;
+            yCom = i + 1;
+            }
+        }
       // diag
+      for(int i = 0; i < boardSize; i++){
+          if(board[i][i] != 'X'){
+              break;
+            }
+          if(i == boardSize-2){
+              xCom = i + 1;
+              yCom = i + 1;
+            }
+        } 
       // reverse diag
+      for(int i = 0; i < boardSize; i++){
+          if(board[i][(boardSize - 1) - i] != 'X'){
+              break;
+            }
+          if(i == boardSize-2){
+              xCom = i + 1;
+              yCom = i + 1;
+            }
+        }
       coord[0] = xCom;
       coord[1] = yCom;
       return coord;
@@ -204,7 +228,46 @@ public class tProcesses
        int xCom = -1;
        int yCom = -1;
        // check for if the computer can win
-       
+       //vert
+       for(int i = 0; i < boardSize; i++){
+            if(board[xCoord][i] != 'O'){
+             break;
+            }
+            if(i == boardSize-2){
+               xCom = i + 1;
+               yCom = i + 1;
+            }
+        }
+        // hori
+       for(int i = 0; i < boardSize; i++){
+        if(board[i][yCoord] != 'O'){
+           break;
+            }
+        if(i == boardSize-2){
+            xCom = i + 1;;
+            yCom = i + 1;
+            }
+        }
+      // diag
+      for(int i = 0; i < boardSize; i++){
+          if(board[i][i] != 'O'){
+              break;
+            }
+          if(i == boardSize-2){
+              xCom = i + 1;
+              yCom = i + 1;
+            }
+        }
+      // reverse diag 
+            for(int i = 0; i < boardSize; i++){
+          if(board[i][(boardSize - 1) - i] != 'O'){
+              break;
+            }
+          if(i == boardSize-2){
+              xCom = i + 1;
+              yCom = i + 1;
+            }
+        }
        coord[0] = xCom;
        coord[1] = yCom;
        return coord;
