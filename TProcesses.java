@@ -58,12 +58,15 @@ public class tProcesses
         }
  
    public void twoPlayer(int boardSize){
-       boardSize = TConsole.boardSize();
+       TConsole = new TConsole(); 
        char[][] board = new char[boardSize][boardSize];
        int moves = 0;
-       System.out.println("Player 1 is X's, Player 2 is O's");
        fillWithBlanks(board);
-       while(victory = false){
+       xWinner = false;
+       oWinner = false;
+       victory = false;
+       System.out.println("player 1 is X, player 2 is O");
+       while(victory == false){
            humanMove(board, boardSize);
            checkVictoryX(board, xCoord, yCoord, boardSize);
            printBoard(board);
@@ -72,13 +75,13 @@ public class tProcesses
            printBoard(board);
            checkVictoryO(board, boardSize);
            moves++;
-           if(moves >= (boardSize ^ 2))
+           if(moves >= (boardSize * boardSize))
            {
                System.out.println("The game is a Tie, do you wish to restart?");
                if(TConsole.replayChoice() == 1){
                twoPlayer(boardSize);
             }
-       }
+           }
        }
        if(xWinner = true){
            System.out.println("Player 1 Wins! Do you wish to restart?");
@@ -86,7 +89,7 @@ public class tProcesses
                twoPlayer(boardSize);
             }
        }
-       if(oWinner = true){
+       else if(oWinner = true){
            System.out.println("Player 2 Wins! Do you wish to restart?");
            if(TConsole.replayChoice() == 1){
                twoPlayer(boardSize);
@@ -95,7 +98,7 @@ public class tProcesses
     }
    public void humanMove(char[][] board, int boardSize){
      printBoard(board);
-     System.out.println("Human Move, choose a X-coordinate from 0 to "+ (boardSize -1));
+     System.out.println("Player 1 Move, choose a X-coordinate from 0 to "+ (boardSize -1));
      xCoord = userInput.nextInt();
      if(xCoord > boardSize || xCoord < 0){
          System.out.println("Error, no X-coordinate exists with that value. Remake your move");
@@ -121,13 +124,13 @@ public class tProcesses
      printBoard(board);
      System.out.println("Player 2 Move, choose a X-coordinate from 0 to " + (boardSize -1));
      xCoord = userInput.nextInt();
-     if(xCoord > 2 || xCoord < 0){
+     if(xCoord > boardSize || xCoord < 0){
          System.out.println("Error, no X-coordinate exists with that value. Remake your move");
          humanMove2(board, boardSize);
         }
      System.out.println("Choose a Y-Coordinate from 0 to " + (boardSize -1));
      yCoord = userInput.nextInt();
-     if(yCoord > 2 || yCoord < 0){
+     if(yCoord > boardSize || yCoord < 0){
          System.out.println("Error, no Y-coordinate exists with that value. Remake your move");
          humanMove2(board, boardSize);
         }
