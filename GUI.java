@@ -26,8 +26,8 @@ public class GUI extends JFrame implements ActionListener
     pnlPlayingField = new JPanel();
     JPanel radioPanel = new JPanel();
 
-    private JRadioButton SelectX = new JRadioButton("User Plays X", false);
-    private  JRadioButton SelectO = new JRadioButton("User Plays O", false);
+    private JRadioButton SelectX = new JRadioButton("User Plays L", false);
+    private  JRadioButton SelectO = new JRadioButton("User Plays M", false);
     private ButtonGroup radioGroup;
     private  String startingPlayer= "";
     final int X = 800, Y = 480, color = 190; // size of the game window
@@ -36,7 +36,7 @@ public class GUI extends JFrame implements ActionListener
     private boolean btnEmptyClicked = false;
     private boolean setTableEnabled = false;
     private String message;
-    private Font font = new Font("Rufscript", Font.BOLD, 100);
+    private Font font = new Font("Papyrus", Font.BOLD, 100);
     private int remainingMoves = 1;
 
     //===============================  GUI  ========================================//
@@ -54,7 +54,7 @@ public class GUI extends JFrame implements ActionListener
         pnlNorth.setLayout(new FlowLayout(FlowLayout.CENTER));
         pnlSouth.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        pnlNorth.setBackground(new Color(70, 70, 70));
+        pnlNorth.setBackground(new Color(0, 0, 90));
         pnlSouth.setBackground(new Color(color, color, color));
 
         pnlTop.setBackground(new Color(color, color, color));
@@ -71,17 +71,17 @@ public class GUI extends JFrame implements ActionListener
         // adding menu items to menu bar
         mnuMain.add(mnuGameTitle);
         mnuGameTitle.setEnabled(false);
-        mnuGameTitle.setFont(new Font("Purisa",Font.BOLD,18));
+        mnuGameTitle.setFont(new Font("Papyrus",Font.BOLD,18));
         mnuMain.add(mnuNewGame);
-        mnuNewGame.setFont(new Font("Purisa",Font.BOLD,18));
+        mnuNewGame.setFont(new Font("Papyrus",Font.BOLD,18));
         mnuMain.add(mnuStartingPlayer);
-        mnuStartingPlayer.setFont(new Font("Purisa",Font.BOLD,18));
+        mnuStartingPlayer.setFont(new Font("Papyrus",Font.BOLD,18));
         mnuMain.add(mnuExit);
-        mnuExit.setFont(new Font("Purisa",Font.BOLD,18));//---->Menu Bar Complete
+        mnuExit.setFont(new Font("Papyrus",Font.BOLD,18));//---->Menu Bar Complete
 
         // adding X & O options to menu
-        SelectX.setFont(new Font("Purisa",Font.BOLD,18));
-        SelectO.setFont(new Font("Purisa",Font.BOLD,18));
+        SelectX.setFont(new Font("Papyrus",Font.BOLD,18));
+        SelectO.setFont(new Font("Papyrus",Font.BOLD,18));
         radioGroup = new ButtonGroup(); // create ButtonGroup
         radioGroup.add(SelectX); // add plain to group
         radioGroup.add(SelectO);
@@ -99,7 +99,7 @@ public class GUI extends JFrame implements ActionListener
         for(int x=1; x <= 9; ++x)   
         {
             btnEmpty[x] = new JButton();
-            btnEmpty[x].setBackground(new Color(220, 220, 220));
+            btnEmpty[x].setBackground(new Color(200, 0, 220));
             btnEmpty[x].addActionListener(this);
             pnlPlayingField.add(btnEmpty[x]);
             btnEmpty[x].setEnabled(setTableEnabled);
@@ -227,13 +227,13 @@ public class GUI extends JFrame implements ActionListener
         public void actionPerformed(ActionEvent event) 
         {
             JRadioButton theButton = (JRadioButton)event.getSource();
-            if(theButton.getText().equals("User Plays X")) 
+            if(theButton.getText().equals("User Plays L")) 
             {
-                startingPlayer = "X";
+                startingPlayer = "L";
             }
-            if(theButton.getText().equals("User Plays O"))
+            if(theButton.getText().equals("User Plays M"))
             {
-                startingPlayer = "O";
+                startingPlayer = "M";
             }
 
             // redisplay the gameboard to the screen

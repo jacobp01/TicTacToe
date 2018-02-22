@@ -11,26 +11,26 @@ public class BusinessLogic
 	{// gets the current move "X" or "O" for the user & displays to screen
 		btnEmpty[currentMove].setFont(font);
  
-		if(startingPlayer.equals("X"))
+		if(startingPlayer.equals("L"))
 		{
 			if(remainingMoves % 2 != 0)
 			{				
-				btnEmpty[currentMove].setText("X");
+				btnEmpty[currentMove].setText("L");
 			}
 			else
 			{
-				btnEmpty[currentMove].setText("O");
+				btnEmpty[currentMove].setText("M");
 			}
 		}
 		else
 		{
 			if(remainingMoves % 2 != 0)
 			{
-				btnEmpty[currentMove].setText("O");
+				btnEmpty[currentMove].setText("M");
 			}
 			else
 			{
-				btnEmpty[currentMove].setText("X");
+				btnEmpty[currentMove].setText("L");
 			}
 		}
 	}// End of GetMove
