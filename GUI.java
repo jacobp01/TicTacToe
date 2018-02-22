@@ -12,11 +12,11 @@ public class GUI extends JFrame implements ActionListener
 
     JMenuBar mnuMain = new JMenuBar();
     JMenuItem   mnuNewGame = new JMenuItem("  New Game"), 
-    mnuGameTitle = new JMenuItem("|Tic Tac Toe|  "),
+    mnuGameTitle = new JMenuItem("|Tic Tac Toe| "),
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
     mnuExit = new JMenuItem("    Quit");
 
-    JButton btnEmpty[] = new JButton[10];
+    JButton btnEmpty[] = new JButton[26];
 
     JPanel  pnlNewGame = new JPanel(),
     pnlNorth = new JPanel(),
@@ -94,9 +94,9 @@ public class GUI extends JFrame implements ActionListener
         mnuStartingPlayer.addActionListener(this);
 
         // setting up the playing field
-        pnlPlayingField.setLayout(new GridLayout(3, 3, 2, 2));
-        pnlPlayingField.setBackground(Color.black);
-        for(int x=1; x <= 9; ++x)   
+        pnlPlayingField.setLayout(new GridLayout(5, 3, 2, 2));
+        pnlPlayingField.setBackground(Color.blue);
+        for(int x=1; x <= 25; ++x)   
         {
             btnEmpty[x] = new JButton();
             btnEmpty[x].setBackground(new Color(200, 0, 220));
@@ -122,9 +122,9 @@ public class GUI extends JFrame implements ActionListener
         Object source = click.getSource();
 
         // check if a button was clicked on the gameboard
-        for(int currentMove=1; currentMove <= 9; ++currentMove) 
+        for(int currentMove=1; currentMove <= 25; ++currentMove) 
         {
-            if(source == btnEmpty[currentMove] && remainingMoves < 10)  
+            if(source == btnEmpty[currentMove] && remainingMoves < 26)  
             {
                 btnEmptyClicked = true;
                 BusinessLogic.GetMove(currentMove, remainingMoves, font, 
@@ -212,7 +212,7 @@ public class GUI extends JFrame implements ActionListener
 
                 radioPanel.add(SelectX);
                 radioPanel.add(SelectO);
-                pnlSouth.setLayout(new GridLayout(2, 1, 2, 1));
+                pnlSouth.setLayout(new GridLayout(5, 1, 2, 1));
                 pnlSouth.add(radioPanel);
                 pnlSouth.add(pnlBottom);
             }
@@ -255,7 +255,7 @@ public class GUI extends JFrame implements ActionListener
 
         remainingMoves = 1;
 
-        for(int x=1; x <= 9; ++x)   
+        for(int x=1; x <= 25; ++x)   
         {
             btnEmpty[x].setText("");
             btnEmpty[x].setEnabled(setTableEnabled);
