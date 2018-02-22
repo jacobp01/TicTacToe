@@ -222,7 +222,7 @@ public class tProcesses
             }
         } 
       // reverse diag
-
+      
       coord[0] = xCom;
       coord[1] = yCom;
       return coord;
