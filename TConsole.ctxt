@@ -1,10 +1,12 @@
 #BlueJ class context
-comment0.params=
-comment0.target=TConsole()
+comment0.target=TConsole
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ TTTInterface\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
-comment1.target=int\ replayChoice()
+comment1.target=TConsole()
 comment2.params=
-comment2.target=int\ boardSize()
+comment2.target=int\ replayChoice()
 comment3.params=
-comment3.target=void\ menu()
-numComments=4
+comment3.target=int\ boardSize()
+comment4.params=
+comment4.target=void\ menu()
+numComments=5

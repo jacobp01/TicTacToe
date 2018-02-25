@@ -38,7 +38,12 @@ public class GUI extends JFrame implements ActionListener
     private String message;
     private Font font = new Font("Papyrus", Font.BOLD, 100);
     private int remainingMoves = 1;
-
+    final int winCombo[][] = new int[][]        {
+                {1, 2, 3},                        {1, 4, 7},                {1, 5, 9},
+                {4, 5, 6},                        {2, 5, 8},                {3, 5, 7},
+                {7, 8, 9},                        {3, 6, 9}
+            };
+    int wonNumber1 = 1, wonNumber2 = 1, wonNumber3 = 1;
     //===============================  GUI  ========================================//
     public GUI() //This is the constructor
     {
@@ -113,6 +118,7 @@ public class GUI extends JFrame implements ActionListener
         window.add(pnlNorth, BorderLayout.NORTH);
         window.add(pnlSouth, BorderLayout.CENTER);
         window.setVisible(true);
+        
     }// End GUI
 
     // ===========  Start Action Performed  ===============//
@@ -266,15 +272,70 @@ public class GUI extends JFrame implements ActionListener
 
     private void CheckWin() 
     {   
-        // row
-        int lCount = 0;
-        for(int i = 0; i < 3; i++){
-            if(btnEmpty[i].getText().equals("L")){
-                lCount++;
+      for(int x=0; x < 8; ++x)    
+        {
+            if(!btnEmpty[winCombo[x][0]].getText().equals("") &&
+                    btnEmpty[winCombo[x][0]].getText().equals(btnEmpty[winCombo[x][1]].getText()) &&
+                    btnEmpty[winCombo[x][1]].getText().equals(btnEmpty[winCombo[x][2]].getText())
+            /*
+                The way this checks the if someone won is:
+                First: it checks if the btnEmpty[x] is not equal to an empty string-    x being the array number 
+                    inside the multi-dimentional array winCombo[checks inside each of the 7 sets][the first number]
+                Second: it checks if btnEmpty[x] is equal to btnEmpty[y]- x being winCombo[each set][the first number]
+                    y being winCombo[each set the same as x][the second number] (So basically checks if the first and
+                    second number in each set is equal to each other)
+                Third: it checks if btnEmtpy[y] is eual to btnEmpty[z]- y being the same y as last time and z being
+                    winCombo[each set as y][the third number]
+                Conclusion: So basically it checks if it is equal to the btnEmpty is equal to each set of numbers
+            */
+                )   
+            {
+                win = true;
+                wonNumber1 = winCombo[x][0];
+                wonNumber2 = winCombo[x][1];
+                wonNumber3 = winCombo[x][2];
+                btnEmpty[wonNumber1].setBackground(Color.white);
+                btnEmpty[wonNumber2].setBackground(Color.white);
+                btnEmpty[wonNumber3].setBackground(Color.white);
+                break;
+            }
         }
-        if(lCount == 3){
-            JOptionPane.showMessageDialog(null, "L Won");
+        if(win || (!win && remainingMoves > 9)) 
+        {
+            if(win) 
+            {
+                if(startingPlayer.equals("L"))
+                {
+                    if(remainingMoves % 2 == 0)
+                        message = "      L has won!";
+                    else
+                        message = "      M has won!";
+                }
+                else
+                {
+                    if(remainingMoves % 2 == 0)
+                        message = "      M has won!";
+                    else    
+                        message = "      L has won!";
+                }
+                JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);               
+                
+            }   
+            else if(!win && remainingMoves > 9) 
+            {
+                message = "Both players have tied!";
+                JOptionPane.showMessageDialog(null, message, "Tie Game!", 
+                        JOptionPane.WARNING_MESSAGE);
+            }
+            for(int x=1; x <= 9; ++x)   
+            {
+                btnEmpty[x].setEnabled(false);
+            }
+            win = false;
+            inGame = false;
+            startingPlayer = "";            
         }
-    }
+  
 }
-}	
+}   
