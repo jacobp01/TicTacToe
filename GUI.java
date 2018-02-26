@@ -7,16 +7,18 @@ import javax.swing.*;
 
 public class GUI extends JFrame implements ActionListener
 {
+    int boardSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Board Size (n x n):"));
     // setting up ALL the variables
-    JFrame window = new JFrame("Kenneth's Tic Tac Toe Game");
+    JFrame window = new JFrame("Jacob's Tic Tac Toe Game");
 
     JMenuBar mnuMain = new JMenuBar();
     JMenuItem   mnuNewGame = new JMenuItem("  New Game"), 
     mnuGameTitle = new JMenuItem("|Tic Tac Toe| "),
     mnuStartingPlayer = new JMenuItem(" Starting Player"),
+    mnuBoardSize = new JMenuItem(" Board Size"),
     mnuExit = new JMenuItem("    Quit");
 
-    JButton btnEmpty[] = new JButton[10];
+    JButton btnEmpty[] = new JButton[(boardSize * boardSize) + 1];
 
     JPanel  pnlNewGame = new JPanel(),
     pnlNorth = new JPanel(),
@@ -77,8 +79,11 @@ public class GUI extends JFrame implements ActionListener
         mnuMain.add(mnuGameTitle);
         mnuGameTitle.setEnabled(false);
         mnuGameTitle.setFont(new Font("Papyrus",Font.BOLD,18));
+
         mnuMain.add(mnuNewGame);
         mnuNewGame.setFont(new Font("Papyrus",Font.BOLD,18));
+        mnuMain.add(mnuBoardSize);
+        mnuBoardSize.setFont(new Font("Papyrus",Font.BOLD,18));
         mnuMain.add(mnuStartingPlayer);
         mnuStartingPlayer.setFont(new Font("Papyrus",Font.BOLD,18));
         mnuMain.add(mnuExit);
@@ -97,14 +102,15 @@ public class GUI extends JFrame implements ActionListener
         mnuNewGame.addActionListener(this);
         mnuExit.addActionListener(this);
         mnuStartingPlayer.addActionListener(this);
+        mnuBoardSize.addActionListener(this);
 
         // setting up the playing field
-        pnlPlayingField.setLayout(new GridLayout(3, 3, 2, 2));
+        pnlPlayingField.setLayout(new GridLayout(boardSize, boardSize, 2, 2));
         pnlPlayingField.setBackground(Color.blue);
-        for(int x=1; x <= 9; ++x)   
+        for(int x=1; x <= (boardSize * boardSize); ++x)   
         {
             btnEmpty[x] = new JButton();
-            btnEmpty[x].setBackground(new Color(200, 0, 220));
+            btnEmpty[x].setBackground(Color.white);
             btnEmpty[x].addActionListener(this);
             pnlPlayingField.add(btnEmpty[x]);
             btnEmpty[x].setEnabled(setTableEnabled);
@@ -128,9 +134,9 @@ public class GUI extends JFrame implements ActionListener
         Object source = click.getSource();
 
         // check if a button was clicked on the gameboard
-        for(int currentMove=1; currentMove <= 9; ++currentMove) 
+        for(int currentMove=1; currentMove <= boardSize; ++currentMove) 
         {
-            if(source == btnEmpty[currentMove] && remainingMoves < 10)  
+            if(source == btnEmpty[currentMove] && remainingMoves < (boardSize + 1))  
             {
                 btnEmptyClicked = true;
                 BusinessLogic.GetMove(currentMove, remainingMoves, font, 
@@ -196,6 +202,18 @@ public class GUI extends JFrame implements ActionListener
                 System.exit(0);
             }
         }
+        else if(source == mnuBoardSize){
+            if(inGame){
+                JOptionPane.showMessageDialog(null, "Cannot select a new board size "+
+                    "at this time.Finish the current game, or select a New Game "+
+                    "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
+                BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
+            }
+            else{
+                 boardSize = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Board Size (n x n):"));
+                 RedrawGameBoard();
+            }
+        }
         // select X or O player 
         else if(source == mnuStartingPlayer)  
         {
@@ -218,7 +236,7 @@ public class GUI extends JFrame implements ActionListener
 
                 radioPanel.add(SelectX);
                 radioPanel.add(SelectO);
-                pnlSouth.setLayout(new GridLayout(3, 1, 2, 1));
+                pnlSouth.setLayout(new GridLayout(boardSize, 1, 2, 1));
                 pnlSouth.add(radioPanel);
                 pnlSouth.add(pnlBottom);
             }
@@ -261,7 +279,7 @@ public class GUI extends JFrame implements ActionListener
 
         remainingMoves = 1;
 
-        for(int x=1; x <= 9; ++x)   
+        for(int x=1; x <= boardSize; ++x)   
         {
             btnEmpty[x].setText("");
             btnEmpty[x].setEnabled(setTableEnabled);
@@ -277,17 +295,6 @@ public class GUI extends JFrame implements ActionListener
             if(!btnEmpty[winCombo[x][0]].getText().equals("") &&
                     btnEmpty[winCombo[x][0]].getText().equals(btnEmpty[winCombo[x][1]].getText()) &&
                     btnEmpty[winCombo[x][1]].getText().equals(btnEmpty[winCombo[x][2]].getText())
-            /*
-                The way this checks the if someone won is:
-                First: it checks if the btnEmpty[x] is not equal to an empty string-    x being the array number 
-                    inside the multi-dimentional array winCombo[checks inside each of the 7 sets][the first number]
-                Second: it checks if btnEmpty[x] is equal to btnEmpty[y]- x being winCombo[each set][the first number]
-                    y being winCombo[each set the same as x][the second number] (So basically checks if the first and
-                    second number in each set is equal to each other)
-                Third: it checks if btnEmtpy[y] is eual to btnEmpty[z]- y being the same y as last time and z being
-                    winCombo[each set as y][the third number]
-                Conclusion: So basically it checks if it is equal to the btnEmpty is equal to each set of numbers
-            */
                 )   
             {
                 win = true;
@@ -320,7 +327,6 @@ public class GUI extends JFrame implements ActionListener
                 }
                 JOptionPane.showMessageDialog(null, message, "Congrats!", 
                         JOptionPane.INFORMATION_MESSAGE);               
-                
             }   
             else if(!win && remainingMoves > 9) 
             {
