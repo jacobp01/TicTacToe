@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class tProcesses
 {
-   private Scanner console;
+    private Scanner console;
    private TConsole TConsole;
    Scanner userInput = new Scanner(System.in);
    boolean victory = false;

@@ -109,13 +109,15 @@ public class GUI extends JFrame implements ActionListener
         // setting up the playing field
         pnlPlayingField.setLayout(new GridLayout(boardSize, boardSize, 2, 2));
         pnlPlayingField.setBackground(Color.blue);
-        for(int x=1; x <= (boardSize * boardSize); ++x)   
+        for(int x = 0; x < boardSize; x++)   
         {
-            btnEmpty[x] = new JButton();
-            btnEmpty[x].setBackground(Color.white);
-            btnEmpty[x].addActionListener(this);
-            pnlPlayingField.add(btnEmpty[x]);
-            btnEmpty[x].setEnabled(setTableEnabled);
+            for(int y = 0; y < boardSize; y++){
+            btnEmpty[x][y] = new JButton();
+            btnEmpty[x][y].setBackground(Color.white);
+            btnEmpty[x][y].addActionListener(this);
+            pnlPlayingField.add(btnEmpty[x][y]);
+            btnEmpty[x][y].setEnabled(setTableEnabled);
+           }
         }
 
         // adding everything needed to pnlNorth and pnlSouth
@@ -136,18 +138,20 @@ public class GUI extends JFrame implements ActionListener
         Object source = click.getSource();
 
         // check if a button was clicked on the gameboard
-        for(int currentMove=1; currentMove <= (boardSize * boardSize); ++currentMove) 
+        for(int currentMove = 0; currentMove < boardSize; ++currentMove) 
         {
-            if(source == btnEmpty[currentMove] && remainingMoves < ((boardSize * boardSize)+ 1))  
+            for(int currentMove2 = 0; currentMove2 < boardSize; currentMove2++){
+            if(source == btnEmpty[currentMove][currentMove2] && remainingMoves < ((boardSize * boardSize)+ 1))  
             {
                 btnEmptyClicked = true;
-                BusinessLogic.GetMove(currentMove, remainingMoves, font, 
+                BusinessLogic.GetMove(currentMove, currentMove2, remainingMoves, font, 
                     btnEmpty, startingPlayer);              
-                btnEmpty[currentMove].setEnabled(false);
+                btnEmpty[currentMove][currentMove2].setEnabled(false);
                 pnlPlayingField.requestFocus();
                 ++remainingMoves;
             }
         }
+    }
 
         // if a button was clicked on the gameboard, check for a winner
         if(btnEmptyClicked) 
@@ -283,8 +287,8 @@ public class GUI extends JFrame implements ActionListener
 
         remainingMoves = 1;
 
-        for(int x=1; x <= (boardSize); ++x)
-        for(int y=1; y<= boardSize; y++){
+        for(int x=0; x < (boardSize); ++x)
+        for(int y=0; y < boardSize; y++){
         {
             btnEmpty[x][y].setText("");
             btnEmpty[x][y].setEnabled(setTableEnabled);
@@ -298,22 +302,33 @@ public class GUI extends JFrame implements ActionListener
         int lCount = 0;
         int mCount = 0;
          // column
-        for(int x = 0; l < boardSize; l++){
-        for(int y = 0; i < boardSize; i++){
+        for(int x = 0; x < btnEmpty.length; x++){
+            lCount = 0;
+            mCount = 0;
+        for(int y = 0; y < btnEmpty[0].length; y++){
          if(btnEmpty[x][y].getText().equals("L")){
              lCount++;
+             System.out.println("What's up" + lCount);
+              System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+             if(lCount == (boardSize)){
+                 System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+               message = "      L has won!";
+                JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+              }
             }
          if(btnEmpty[x][y].getText().equals("M")){
              mCount++;
-            }
-         if(lCount = boardSize){
-            message = "      L has won!";
-            }
-         if(mCount = boardSize){
-            message = "      M has won!";
+             System.out.println("donger" + mCount);
+             if(mCount == boardSize){
+                 message = "      M has won!";
+                  JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+              }
             }
        }
      }
+          
         // OLD CHECKWIN BELOW
       /* for(int x=0; x < ((boardSize * boardSize) - 1); ++x)    
         {

@@ -6,31 +6,31 @@ import java.awt.*;
  
 public class BusinessLogic
 {
-	public static void GetMove(int currentMove, int remainingMoves, Font font, JButton btnEmpty[], 
+	public static void GetMove(int currentMove, int  currentMove2, int remainingMoves, Font font, JButton btnEmpty[][], 
 			String startingPlayer)
 	{// gets the current move "X" or "O" for the user & displays to screen
-		btnEmpty[currentMove].setFont(font);
+		btnEmpty[currentMove][currentMove2].setFont(font);
  
 		if(startingPlayer.equals("L"))
 		{
 			if(remainingMoves % 2 != 0)
 			{				
-				btnEmpty[currentMove].setText("L");
+				btnEmpty[currentMove][currentMove2].setText("L");
 			}
 			else
 			{
-				btnEmpty[currentMove].setText("M");
+				btnEmpty[currentMove][currentMove2].setText("M");
 			}
 		}
 		else
 		{
 			if(remainingMoves % 2 != 0)
 			{
-				btnEmpty[currentMove].setText("M");
+				btnEmpty[currentMove][currentMove2].setText("M");
 			}
 			else
 			{
-				btnEmpty[currentMove].setText("L");
+				btnEmpty[currentMove][currentMove2].setText("L");
 			}
 		}
 	}// End of GetMove
