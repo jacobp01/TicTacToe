@@ -301,7 +301,7 @@ public class GUI extends JFrame implements ActionListener
     {   
         int lCount = 0;
         int mCount = 0;
-         // column
+         // rows
         for(int x = 0; x < btnEmpty.length; x++){
             lCount = 0;
             mCount = 0;
@@ -328,7 +328,95 @@ public class GUI extends JFrame implements ActionListener
             }
        }
      }
-          
+     // columns
+     for(int y = 0; y < btnEmpty.length; y++){
+            lCount = 0;
+            mCount = 0;
+        for(int x = 0; x < btnEmpty[0].length; x++){
+         if(btnEmpty[x][y].getText().equals("L")){
+             lCount++;
+             System.out.println("What's up" + lCount);
+              System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+             if(lCount == (boardSize)){
+                 System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+               message = "      L has won!";
+                JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+               inGame = false;
+               startingPlayer = "";
+              }
+            }
+         if(btnEmpty[x][y].getText().equals("M")){
+             mCount++;
+             System.out.println("donger" + mCount);
+             if(mCount == boardSize){
+                 message = "      M has won!";
+                  JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                 inGame = false;
+                 startingPlayer = "";
+              }
+            }
+       }
+     }
+     // diagnol normal
+               lCount = 0;
+            mCount = 0;
+     for(int x = 0; x < btnEmpty.length; x++){
+         if(btnEmpty[x][x].getText().equals("L")){
+             lCount++;
+             System.out.println("What's up" + lCount);
+              System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+             if(lCount == (boardSize)){
+                 System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+               message = "      L has won!";
+                JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+               inGame = false;
+               startingPlayer = "";
+              }
+            }
+         if(btnEmpty[x][x].getText().equals("M")){
+             mCount++;
+             System.out.println("donger" + mCount);
+             if(mCount == boardSize){
+                 message = "      M has won!";
+                  JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                 inGame = false;
+                 startingPlayer = "";
+              }
+            }
+        }
+        // diagnol reverse
+               lCount = 0;
+            mCount = 0;
+     for(int x = 0; x < btnEmpty.length; x++){
+         if(btnEmpty[x][(boardSize - 1) - x].getText().equals("L")){
+             lCount++;
+             System.out.println("What's up" + lCount);
+              System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+             if(lCount == (boardSize)){
+                 System.out.println("BOARDSIZE IS THIS ONE:  " + boardSize);
+               message = "      L has won!";
+                JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+               inGame = false;
+               startingPlayer = "";
+              }
+            }
+         if(btnEmpty[x][(boardSize - 1) - x].getText().equals("M")){
+             mCount++;
+             System.out.println("donger" + mCount);
+             if(mCount == boardSize){
+                 message = "      M has won!";
+                  JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                 inGame = false;
+                 startingPlayer = "";
+              }
+            }
+        }
         // OLD CHECKWIN BELOW
       /* for(int x=0; x < ((boardSize * boardSize) - 1); ++x)    
         {
