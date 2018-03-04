@@ -1,14 +1,15 @@
 #BlueJ class context
-comment0.params=
-comment0.target=GUI()
+comment0.target=GUI
 comment1.params=
-comment1.target=void\ comMove()
-comment2.params=click
-comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
-comment3.params=
-comment3.target=void\ RedrawGameBoard()
-comment3.text=\r\n\ \ \ \ \ \ \ \ ----------------------------------\r\n\ \ \ \ \ \ \ \ Start\ of\ all\ the\ other\ methods.\ |\r\n\ \ \ \ \ \ \ \ ----------------------------------\r\n
+comment1.target=GUI()
+comment2.params=
+comment2.target=void\ comMove()
+comment3.params=click
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
 comment4.params=
-comment4.target=void\ CheckWin()
-comment4.text=\ private\ void\ comMove(){\r\n\ \ \ \ \ \ \ \ //\ Find\ move\ that\ the\ CPU\ can\ make\ to\ win\ -\ Highest\ Priority\r\n\ \ \ \ \ \ \ \ //\ Find\ move\ to\ block\ a\ player\ win\ -\ Next\ Priority\r\n\ \ \ \ \ \ \ \ //\ Make\ random\ move\ -\ Lowest\ Priority\r\n\ \ \ \ \ \ \ \ int[]\ humanCoord\ \=\ canWin(board,\ boardSize);\r\n\ \ \ \ \ \ \ \ int[]\ comCoord\ \=\ canComWin(board,\ boardSize);\r\n\ \ \ \ \ \ \ \ if(humanCoord[0]\ \!\=\ -1){\r\n\ \ \ \ \ \ \ \ xCoord\ \=\ humanCoord[0];\r\n\ \ \ \ \ \ \ \ yCoord\ \=\ humanCoord[1];\r\n\ \ \ \ \ \ \ \ board[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ \ \ \ \ }\r\n\r\n\ \ \ \ \ \ \ \ else\ if(comCoord[0]\ \!\=\ -1){\r\n\ \ \ \ \ \ \ \ xCoord\ \=\ comCoord[0];\r\n\ \ \ \ \ \ \ \ yCoord\ \=\ comCoord[1];\r\n\ \ \ \ \ \ \ \ board[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ else{\r\n\ \ \ \ \ \ \ \ xCoord\ \=\ (int)\ (Math.random()\ *\ boardSize);\r\n\ \ \ \ \ \ \ \ yCoord\ \=\ (int)\ (Math.random()\ *\ boardSize);\r\n\ \ \ \ \ \ \ \ if(btnEmpty[xCoord][yCoord]\ \=\=\ ""){\r\n\ \ \ \ \ \ \ \ btnEmpty[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ else\r\n\ \ \ \ \ \ \ \ {\r\n\ \ \ \ \ \ \ \ comMove(board,\ boardSize);\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ }\r\n\ \ \ \ \ \ \ \ }\r\n
-numComments=5
+comment4.target=void\ RedrawGameBoard()
+comment4.text=\r\n\ \ \ \ ----------------------------------\r\n\ \ \ \ Start\ of\ all\ the\ other\ methods.\ |\r\n\ \ \ \ ----------------------------------\r\n
+comment5.params=
+comment5.target=void\ CheckWin()
+comment5.text=\ private\ void\ comMove(){\r\n\ \ \ \ //\ Find\ move\ that\ the\ CPU\ can\ make\ to\ win\ -\ Highest\ Priority\r\n\ \ \ \ //\ Find\ move\ to\ block\ a\ player\ win\ -\ Next\ Priority\r\n\ \ \ \ //\ Make\ random\ move\ -\ Lowest\ Priority\r\n\ \ \ \ int[]\ humanCoord\ \=\ canWin(board,\ boardSize);\r\n\ \ \ \ int[]\ comCoord\ \=\ canComWin(board,\ boardSize);\r\n\ \ \ \ if(humanCoord[0]\ \!\=\ -1){\r\n\ \ \ \ xCoord\ \=\ humanCoord[0];\r\n\ \ \ \ yCoord\ \=\ humanCoord[1];\r\n\ \ \ \ board[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ }\r\n\r\n\ \ \ \ else\ if(comCoord[0]\ \!\=\ -1){\r\n\ \ \ \ xCoord\ \=\ comCoord[0];\r\n\ \ \ \ yCoord\ \=\ comCoord[1];\r\n\ \ \ \ board[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ }\r\n\ \ \ \ else{\r\n\ \ \ \ xCoord\ \=\ (int)\ (Math.random()\ *\ boardSize);\r\n\ \ \ \ yCoord\ \=\ (int)\ (Math.random()\ *\ boardSize);\r\n\ \ \ \ if(btnEmpty[xCoord][yCoord]\ \=\=\ ""){\r\n\ \ \ \ btnEmpty[xCoord][yCoord]\ \=\ 'O';\r\n\ \ \ \ }\r\n\ \ \ \ else\r\n\ \ \ \ {\r\n\ \ \ \ comMove(board,\ boardSize);\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n\ \ \ \ }\r\n
+numComments=6

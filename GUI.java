@@ -164,7 +164,6 @@ public class GUI extends JFrame implements ActionListener
         // check if the user clicks on a menu item
         if(source == mnuNewGame)    
         {
-            System.out.println(startingPlayer);
             BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
                 pnlPlayingField,pnlBottom,radioPanel);
             if(startingPlayer.equals(""))
@@ -237,12 +236,12 @@ public class GUI extends JFrame implements ActionListener
                             lCount++;
                             if(lCount == (boardSize - 1)){
                                 for(int z = 0; z < boardSize; z++){
-                               if(btnEmpty[x][z].getText().equals("")){
-                                currentMove = x;
-                                currentMove2 = z;
-                               }
+                                    if(btnEmpty[x][z].getText().equals("")){
+                                        currentMove = x;
+                                        currentMove2 = z;
+                                    }
+                                }
                             }
-                        }
                         }
                         if(btnEmpty[x][y].getText().equals("M")){
                             mCount++;
@@ -260,14 +259,24 @@ public class GUI extends JFrame implements ActionListener
                     for(int x = 0; x < btnEmpty[0].length; x++){
                         if(btnEmpty[x][y].getText().equals("L")){
                             lCount++;
-                            if(lCount == (boardSize)){
-
+                            if(lCount == (boardSize - 1)){
+                                for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][y].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = y;
+                                    }
+                                }
                             }
                         }
                         if(btnEmpty[x][y].getText().equals("M")){
                             mCount++;
-                            if(mCount == boardSize){
-
+                            if(mCount == boardSize - 1){
+                                for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][y].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = y;
+                                    }
+                                }
                             }
                         }
                     }
@@ -278,14 +287,24 @@ public class GUI extends JFrame implements ActionListener
                 for(int x = 0; x < btnEmpty.length; x++){
                     if(btnEmpty[x][x].getText().equals("L")){
                         lCount++;
-                        if(lCount == (boardSize)){
-
+                        if(lCount == (boardSize - 1)){
+                          for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][z].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = z;
+                                    }
+                                }  
                         }
                     }
                     if(btnEmpty[x][x].getText().equals("M")){
                         mCount++;
-                        if(mCount == boardSize){
-
+                        if(mCount == boardSize - 1){
+                            for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][z].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = z;
+                                    }
+                                }  
                         }
                     }
                 }
@@ -296,13 +315,23 @@ public class GUI extends JFrame implements ActionListener
                     if(btnEmpty[x][(boardSize - 1) - x].getText().equals("L")){
                         lCount++;
                         if(lCount == (boardSize)){
-
+                            for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][((boardSize - 1) - z)].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = ((boardSize - 1) - z);
+                                    }
+                                }
                         }
                     }
                     if(btnEmpty[x][(boardSize - 1) - x].getText().equals("M")){
                         mCount++;
-                        if(mCount == boardSize){
-
+                        if(mCount == (boardSize - 1)){
+                            for(int z = 0; z < boardSize; z++){
+                                    if(btnEmpty[z][((boardSize - 1) - z)].getText().equals("")){
+                                        currentMove = z;
+                                        currentMove2 = ((boardSize - 1) - z);
+                                    }
+                                }
                         }
                     }
                 }
@@ -315,7 +344,7 @@ public class GUI extends JFrame implements ActionListener
                     currentMove = (int)(Math.random() * boardSize);
                     currentMove2 = (int)(Math.random() * boardSize);
                 }
-                
+
                 BusinessLogic.GetMove(currentMove, currentMove2, remainingMoves, font, 
                     btnEmpty, startingPlayer);              
                 btnEmpty[currentMove][currentMove2].setEnabled(false);
@@ -333,169 +362,144 @@ public class GUI extends JFrame implements ActionListener
             CheckWin();
         }
 
-            // select X or O player 
-            else if(source == mnuStartingPlayer)  
+        // select X or O player 
+        else if(source == mnuStartingPlayer)  
+        {
+            if(inGame)  
             {
-                if(inGame)  
-                {
-                    JOptionPane.showMessageDialog(null, "Cannot select a new Starting "+
-                        "Player at this time.nFinish the current game, or select a New Game "+
-                        "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
-                    BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
-                }
-                else
-                {
-                    setTableEnabled = true;
-                    BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
-                        pnlPlayingField,pnlBottom,radioPanel);
-
-                    SelectX.addActionListener(new RadioListener());
-                    SelectO.addActionListener(new RadioListener());
-                    radioPanel.setLayout(new GridLayout(2,1));
-
-                    radioPanel.add(SelectX);
-                    radioPanel.add(SelectO);
-                    pnlSouth.setLayout(new GridLayout(boardSize, 1, 2, 1));
-                    pnlSouth.add(radioPanel);
-                    pnlSouth.add(pnlBottom);
-                }
+                JOptionPane.showMessageDialog(null, "Cannot select a new Starting "+
+                    "Player at this time.nFinish the current game, or select a New Game "+
+                    "to continue", "Game In Session..", JOptionPane.INFORMATION_MESSAGE);
+                BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);
             }
+            else
+            {
+                setTableEnabled = true;
+                BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
+                    pnlPlayingField,pnlBottom,radioPanel);
+
+                SelectX.addActionListener(new RadioListener());
+                SelectO.addActionListener(new RadioListener());
+                radioPanel.setLayout(new GridLayout(2,1));
+
+                radioPanel.add(SelectX);
+                radioPanel.add(SelectO);
+                pnlSouth.setLayout(new GridLayout(boardSize, 1, 2, 1));
+                pnlSouth.add(radioPanel);
+                pnlSouth.add(pnlBottom);
+            }
+        }
+        pnlSouth.setVisible(false); 
+        pnlSouth.setVisible(true);  
+    }// End Action Performed
+
+    // ===========  Start RadioListener  ===============//  
+    private class RadioListener implements ActionListener 
+    {
+        public void actionPerformed(ActionEvent event) 
+        {
+            JRadioButton theButton = (JRadioButton)event.getSource();
+            if(theButton.getText().equals("User Plays L")) 
+            {
+                startingPlayer = "L";
+            }
+            if(theButton.getText().equals("User Plays M"))
+            {
+                startingPlayer = "M";
+            }
+
+            // redisplay the gameboard to the screen
             pnlSouth.setVisible(false); 
-            pnlSouth.setVisible(true);  
-        }// End Action Performed
+            pnlSouth.setVisible(true);          
+            RedrawGameBoard();
+        }
+    }// End RadioListener
+    /*
+    ----------------------------------
+    Start of all the other methods. |
+    ----------------------------------
+     */
+    private void RedrawGameBoard()  
+    {
+        BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
+            pnlPlayingField,pnlBottom,radioPanel);
+        BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);       
 
-        // ===========  Start RadioListener  ===============//  
-        private class RadioListener implements ActionListener 
-        {
-            public void actionPerformed(ActionEvent event) 
-            {
-                JRadioButton theButton = (JRadioButton)event.getSource();
-                if(theButton.getText().equals("User Plays L")) 
+        remainingMoves = 1;
+
+        for(int x=0; x < (boardSize); ++x)
+            for(int y=0; y < boardSize; y++){
                 {
-                    startingPlayer = "L";
-                }
-                if(theButton.getText().equals("User Plays M"))
-                {
-                    startingPlayer = "M";
-                }
-
-                // redisplay the gameboard to the screen
-                pnlSouth.setVisible(false); 
-                pnlSouth.setVisible(true);          
-                RedrawGameBoard();
-            }
-        }// End RadioListener
-        /*
-        ----------------------------------
-        Start of all the other methods. |
-        ----------------------------------
-         */
-        private void RedrawGameBoard()  
-        {
-            BusinessLogic.ClearPanelSouth(pnlSouth,pnlTop,pnlNewGame,
-                pnlPlayingField,pnlBottom,radioPanel);
-            BusinessLogic.ShowGame(pnlSouth,pnlPlayingField);       
-
-            remainingMoves = 1;
-
-            for(int x=0; x < (boardSize); ++x)
-                for(int y=0; y < boardSize; y++){
-                    {
-                        btnEmpty[x][y].setText("");
-                        btnEmpty[x][y].setEnabled(setTableEnabled);
-                    }
-                }
-            win = false;        
-        }
-        /* private void comMove(){
-        // Find move that the CPU can make to win - Highest Priority
-        // Find move to block a player win - Next Priority
-        // Make random move - Lowest Priority
-        int[] humanCoord = canWin(board, boardSize);
-        int[] comCoord = canComWin(board, boardSize);
-        if(humanCoord[0] != -1){
-        xCoord = humanCoord[0];
-        yCoord = humanCoord[1];
-        board[xCoord][yCoord] = 'O';
-        }
-
-        else if(comCoord[0] != -1){
-        xCoord = comCoord[0];
-        yCoord = comCoord[1];
-        board[xCoord][yCoord] = 'O';
-        }
-        else{
-        xCoord = (int) (Math.random() * boardSize);
-        yCoord = (int) (Math.random() * boardSize);
-        if(btnEmpty[xCoord][yCoord] == ""){
-        btnEmpty[xCoord][yCoord] = 'O';
-        }
-        else
-        {
-        comMove(board, boardSize);
-        }
-        }
-        }
-         */    
-        private void CheckWin() 
-        {   
-            int lCount = 0;
-            int mCount = 0;
-            // rows
-            for(int x = 0; x < btnEmpty.length; x++){
-                lCount = 0;
-                mCount = 0;
-                for(int y = 0; y < btnEmpty[0].length; y++){
-                    if(btnEmpty[x][y].getText().equals("L")){
-                        lCount++;
-                        if(lCount == (boardSize)){
-                            message = "      L has won!";
-                            JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    }
-                    if(btnEmpty[x][y].getText().equals("M")){
-                        mCount++;
-                        if(mCount == boardSize){
-                            message = "      M has won!";
-                            JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    }
+                    btnEmpty[x][y].setText("");
+                    btnEmpty[x][y].setEnabled(setTableEnabled);
                 }
             }
-            // columns
-            for(int y = 0; y < btnEmpty.length; y++){
-                lCount = 0;
-                mCount = 0;
-                for(int x = 0; x < btnEmpty[0].length; x++){
-                    if(btnEmpty[x][y].getText().equals("L")){
-                        lCount++;
-                        if(lCount == (boardSize)){
-                            message = "      L has won!";
-                            JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                            inGame = false;
-                            startingPlayer = "";
-                        }
-                    }
-                    if(btnEmpty[x][y].getText().equals("M")){
-                        mCount++;
-                        if(mCount == boardSize){
-                            message = "      M has won!";
-                            JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                                JOptionPane.INFORMATION_MESSAGE);
-                            inGame = false;
-                            startingPlayer = "";
-                        }
-                    }
-                }
-            }
-            // diagnol normal
+        win = false;        
+    }
+
+    /* private void comMove(){
+    // Find move that the CPU can make to win - Highest Priority
+    // Find move to block a player win - Next Priority
+    // Make random move - Lowest Priority
+    int[] humanCoord = canWin(board, boardSize);
+    int[] comCoord = canComWin(board, boardSize);
+    if(humanCoord[0] != -1){
+    xCoord = humanCoord[0];
+    yCoord = humanCoord[1];
+    board[xCoord][yCoord] = 'O';
+    }
+
+    else if(comCoord[0] != -1){
+    xCoord = comCoord[0];
+    yCoord = comCoord[1];
+    board[xCoord][yCoord] = 'O';
+    }
+    else{
+    xCoord = (int) (Math.random() * boardSize);
+    yCoord = (int) (Math.random() * boardSize);
+    if(btnEmpty[xCoord][yCoord] == ""){
+    btnEmpty[xCoord][yCoord] = 'O';
+    }
+    else
+    {
+    comMove(board, boardSize);
+    }
+    }
+    }
+     */    
+    private void CheckWin() 
+    {   
+        int lCount = 0;
+        int mCount = 0;
+        // rows
+        for(int x = 0; x < btnEmpty.length; x++){
             lCount = 0;
             mCount = 0;
-            for(int x = 0; x < btnEmpty.length; x++){
-                if(btnEmpty[x][x].getText().equals("L")){
+            for(int y = 0; y < btnEmpty[0].length; y++){
+                if(btnEmpty[x][y].getText().equals("L")){
+                    lCount++;
+                    if(lCount == (boardSize)){
+                        message = "      L has won!";
+                        JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+                if(btnEmpty[x][y].getText().equals("M")){
+                    mCount++;
+                    if(mCount == boardSize){
+                        message = "      M has won!";
+                        JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                            JOptionPane.INFORMATION_MESSAGE);
+                    }
+                }
+            }
+        }
+        // columns
+        for(int y = 0; y < btnEmpty.length; y++){
+            lCount = 0;
+            mCount = 0;
+            for(int x = 0; x < btnEmpty[0].length; x++){
+                if(btnEmpty[x][y].getText().equals("L")){
                     lCount++;
                     if(lCount == (boardSize)){
                         message = "      L has won!";
@@ -505,7 +509,7 @@ public class GUI extends JFrame implements ActionListener
                         startingPlayer = "";
                     }
                 }
-                if(btnEmpty[x][x].getText().equals("M")){
+                if(btnEmpty[x][y].getText().equals("M")){
                     mCount++;
                     if(mCount == boardSize){
                         message = "      M has won!";
@@ -516,31 +520,57 @@ public class GUI extends JFrame implements ActionListener
                     }
                 }
             }
-            // diagnol reverse
-            lCount = 0;
-            mCount = 0;
-            for(int x = 0; x < btnEmpty.length; x++){
-                if(btnEmpty[x][(boardSize - 1) - x].getText().equals("L")){
-                    lCount++;
-                    if(lCount == (boardSize)){
-                        message = "      L has won!";
-                        JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                            JOptionPane.INFORMATION_MESSAGE);
-                        inGame = false;
-                        startingPlayer = "";
-                    }
-                }
-                if(btnEmpty[x][(boardSize - 1) - x].getText().equals("M")){
-                    mCount++;
-                    if(mCount == boardSize){
-                        message = "      M has won!";
-                        JOptionPane.showMessageDialog(null, message, "Congrats!", 
-                            JOptionPane.INFORMATION_MESSAGE);
-                        inGame = false;
-                        startingPlayer = "";
-                    }
+        }
+        // diagnol normal
+        lCount = 0;
+        mCount = 0;
+        for(int x = 0; x < btnEmpty.length; x++){
+            if(btnEmpty[x][x].getText().equals("L")){
+                lCount++;
+                if(lCount == (boardSize)){
+                    message = "      L has won!";
+                    JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    inGame = false;
+                    startingPlayer = "";
                 }
             }
-
+            if(btnEmpty[x][x].getText().equals("M")){
+                mCount++;
+                if(mCount == boardSize){
+                    message = "      M has won!";
+                    JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    inGame = false;
+                    startingPlayer = "";
+                }
+            }
         }
-    }   
+        // diagnol reverse
+        lCount = 0;
+        mCount = 0;
+        for(int x = 0; x < btnEmpty.length; x++){
+            if(btnEmpty[x][(boardSize - 1) - x].getText().equals("L")){
+                lCount++;
+                if(lCount == (boardSize)){
+                    message = "      L has won!";
+                    JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    inGame = false;
+                    startingPlayer = "";
+                }
+            }
+            if(btnEmpty[x][(boardSize - 1) - x].getText().equals("M")){
+                mCount++;
+                if(mCount == boardSize){
+                    message = "      M has won!";
+                    JOptionPane.showMessageDialog(null, message, "Congrats!", 
+                        JOptionPane.INFORMATION_MESSAGE);
+                    inGame = false;
+                    startingPlayer = "";
+                }
+            }
+        }
+
+    }
+}   
